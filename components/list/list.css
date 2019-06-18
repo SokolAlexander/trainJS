@@ -36,3 +36,7 @@
 .list-item-delete::before {
     transform: rotate(-45deg);
 }
+
+.list-item-checked {
+    background-color: aquamarine;
+}

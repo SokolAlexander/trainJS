@@ -37,6 +37,9 @@ class List {
     _renderItem(item, index) {
         let $newItem = document.createElement('div');
         $newItem.classList.add('list-item');
+        if (item.checked) {
+            console.log(item);
+            $newItem.classList.add('list-item-checked')};
 
         let $itemDate = this._getNewDiv(item, 'date');
         let $itemText = this._getNewDiv(item, 'text');
@@ -74,10 +77,13 @@ class List {
     }
 
     _onClick(e) {
-        console.log('ok');
         if (e.target.classList.contains('list-item-delete')) {
-            this._deleteItem(e.target.parentNode);
+            this.deleteItem(e.target.parentNode);
+        } else {
+            this.checkItem(e.target);
         }
+
+        
     }
 
     /**
@@ -105,11 +111,23 @@ class List {
         this._render();
     }
 
-    _deleteItem(item) {
+    /**
+     * deletes item from array and calls render
+     * @param {htmlEl} item 
+     */
+    deleteItem(item) {
         this.data = this.data.filter((elem, i) => {
             return parseInt(item.dataset.index) !== i});
         this._render();
-        console.log(this.data)
+    }
+
+    checkItem(item) {
+        while (item !== this.$el) {
+            if (item.classList.contains('list-item')) break;
+            else item = item.parentNode;
+        }
+        this.data[parseInt(item.dataset.index)].checked = !this.data[parseInt(item.dataset.index)].checked;
+        this._render();
     }
 }
 

@@ -8,7 +8,8 @@ class App {
     constructor(htmlEl) {
         this.$el = htmlEl;
 
-        let data = [{date: '12-05-14', text: 'asdgov'}, {date: '12-05-14', text: 'asdgov'}];
+        let data = [{date: '12-05-14', text: 'asdgov', checked: false}, 
+                    {date: '12-05-14', text: 'asdgov', checked: false}];
         this.list = new List(this._getNewEl('div', 'list'), data);
         this.form = new Form(this._getNewEl('form', 'form'));
 
