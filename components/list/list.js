@@ -76,6 +76,10 @@ class List {
         this.$el.addEventListener('click', this._onClick.bind(this));
     }
 
+    /**
+     * click 
+     * @param {event} e 
+     */
     _onClick(e) {
         if (e.target.classList.contains('list-item-delete')) {
             this.deleteItem(e.target.parentNode);
@@ -98,8 +102,14 @@ class List {
     /**
      * filters data
      */
-    filterData() {
-
+    filterData(e) {
+        let dateTo = e.detail.dateTo;
+        let dateFrom = e.detail.dateFrom;
+        this.data = this.data.filter(item => {
+            return (CustomDate.compareDates(dateFrom, item.date) &&
+                    CustomDate.compareDates(item.date, dateTo))
+        });
+        console.log(e.detail.dateTo, e.detail.dateFrom);
     }
 
     /**
@@ -107,7 +117,9 @@ class List {
      * @param {CustomEvent} e 
      */
     addItem(e) {
+        e.detail.date = CustomDate.getFormattedDate(new Date(e.detail.date));
         this.data.push(e.detail);
+        console.log(e.detail);
         this._render();
     }
 
@@ -121,12 +133,17 @@ class List {
         this._render();
     }
 
+    /**
+     * Makes item checked
+     * @param {htmlEl} item 
+     */
     checkItem(item) {
         while (item !== this.$el) {
             if (item.classList.contains('list-item')) break;
             else item = item.parentNode;
         }
-        this.data[parseInt(item.dataset.index)].checked = !this.data[parseInt(item.dataset.index)].checked;
+        this.data[parseInt(item.dataset.index)].checked = 
+            !this.data[parseInt(item.dataset.index)].checked;
         this._render();
     }
 }

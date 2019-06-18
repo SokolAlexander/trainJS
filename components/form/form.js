@@ -7,8 +7,9 @@ class Form {
      * Creates a form using htmlEl
      * @param {htmlEL} htmlEl 
      */
-    constructor(htmlEl) {
+    constructor(htmlEl, ...args) {
         this.$el = htmlEl;
+        this.inputs = args;
         this._render();
         this._initEvents();
     }
@@ -17,18 +18,22 @@ class Form {
      * renders the form
      */
     _render() {
-        this._addInput('text', 'form-input-text', 'text goes here');
-        this._addInput('date','form-input-date', '2012-01-10');
-        this._addInput('submit', 'form-input-button', 'Добавить');
+        this.$el.innerHTML = '';
+        if (this.inputs[0]) {
+        this.inputs[0].forEach(element => {
+            this._addInput(element.type, element.value, element.label);
+        });
+        }
+        this._addInput('submit', 'Добавить');
     }
 
     /**
      * adds one input of type, adds a className
      * @param {String} type
-     * @param {String} ClassName
      * @param {String} Value
      */
-    _addInput(type, className, value) {
+    _addInput(type, value) {
+        let className = 'form-input-' + type;
         let $newInput = document.createElement('input');
         $newInput.setAttribute('type', type);
         $newInput.classList.add(className);
@@ -60,9 +65,14 @@ class Form {
      */
     _getFormData() {
         let textValue = this.$el.querySelector('input[type="text"]').value;
-        let dateValue = this.$el.querySelector('input[type="date"]').value;
+        let dateInputs = this.$el.querySelectorAll('input[type="date"]');
 
-        return {text: textValue, date: dateValue}
+        if (!dateInputs[1]) return {text: textValue, date: dateInputs[0].value}
+        return {
+            text: textValue,
+            dateFrom: dateInputs[0].value,
+            dateTo: dateInputs[1].value
+        }
     }
 }
 

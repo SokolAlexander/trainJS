@@ -10,8 +10,30 @@ class App {
 
         let data = [{date: '12-05-14', text: 'asdgov', checked: false}, 
                     {date: '12-05-14', text: 'asdgov', checked: false}];
+        
         this.list = new List(this._getNewEl('div', 'list'), data);
-        this.form = new Form(this._getNewEl('form', 'form'));
+        this.formAdd = new Form(this._getNewEl('form', 'form-add'), 
+                                            [{
+                                                type: 'text', 
+                                                value: 'text goes '
+                                            },
+                                            {                                                
+                                                type: 'date', 
+                                                value: '12-01-01'
+                                            }]);
+        this.formFilter = new Form(this._getNewEl('form', 'form-filter'), 
+                                            [{
+                                                type: 'text', 
+                                                value: 'text goes here2'
+                                            },
+                                            {                                                
+                                                type: 'date', 
+                                                value: '12-01-01'
+                                            },
+                                            {                                                
+                                                type: 'date', 
+                                                value: '12-01-02'
+                                            }]);
 
         this._initEvents();
     }
@@ -30,8 +52,16 @@ class App {
     }
 
     _initEvents() {
-        this.$el.addEventListener('formSubmit', e => this.list.addItem(e));
-        this.$el.addEventListener('deleteClick', e => this.list.deleteItem(e));
+        this.$el.addEventListener('formSubmit', e => {
+
+            console.log(e.target)
+            if (e.target === this.formAdd.$el) {
+                debugger
+                this.list.addItem(e);
+            } else {
+                this.list.filterData(e);
+            }
+        });
     }
 }
 

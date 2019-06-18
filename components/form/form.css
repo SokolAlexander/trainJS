@@ -1,11 +1,18 @@
-.form {
+.form-add {
     width: 70%;
     padding: 20px;
     margin: auto;
     border: 2px solid blue;
 }
 
+.form-filter {
+    width: 100%;
+    padding: 10px;
+    border: 3px dashed red;
+}
+
 input {
     width: 26%;
     margin: 20px;
 }
+
