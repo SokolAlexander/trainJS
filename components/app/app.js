@@ -8,21 +8,29 @@ class App {
     constructor(htmlEl) {
         this.$el = htmlEl;
 
-        this.data = [{date: '12-05-14', text: 'asdgov'}];
-        this.form = new Form(this._getNewDiv('form'));
-        this.list = new List(this._getNewDiv('list'), this.data);
+        let data = [{date: '12-05-14', text: 'asdgov'}, {date: '12-05-14', text: 'asdgov'}];
+        this.list = new List(this._getNewEl('div', 'list'), data);
+        this.form = new Form(this._getNewEl('form', 'form'));
+
+        this._initEvents();
     }
 
     /**
-     * creates, appends and returns div 
-     * @param {string} CSSCllassName
-     * @returns {htmlEl} $formEl
+     * creates, appends and returns html element with tag, adds a CSS className 
+     * @param {string} tag 
+     * @param {string} className
+     * @returns {htmlEl}
      */
-    _getNewDiv(CSSCllass) {
-        let $newEl = document.createElement('div');
-        $newEl.classList.add(CSSCllass, 'js-' + CSSCllass);
+    _getNewEl(tag, className) {
+        let $newEl = document.createElement(tag);
+        $newEl.classList.add(className, 'js-' + className);
         this.$el.appendChild($newEl);
         return $newEl;
+    }
+
+    _initEvents() {
+        this.$el.addEventListener('formSubmit', e => this.list.addItem(e));
+        this.$el.addEventListener('deleteClick', e => this.list.deleteItem(e));
     }
 }
 

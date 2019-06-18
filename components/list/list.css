@@ -1,0 +1,38 @@
+.list {
+    border: 1px solid black;
+    width: 50%;
+    padding: 30px;
+    text-align: center;
+    margin: auto;
+}
+
+
+.list-item {
+    border: 1px solid green;
+    padding: 10px;
+}
+
+.list-item-date {
+    float: left;
+}
+
+.list-item-delete {
+    position: relative;
+    /* border: 1px  solid grey; */
+}
+
+.list-item-delete::before, .list-item-delete::after {
+    position: absolute;
+    width: 5px;
+    height:  30px;
+    left: 340px;
+    top: -23px;
+    content: ' ';
+    background-color: red;
+    z-index: 100;
+    transform: rotate(45deg);
+}
+
+.list-item-delete::before {
+    transform: rotate(-45deg);
+}
