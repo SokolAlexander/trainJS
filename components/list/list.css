@@ -12,16 +12,20 @@
     padding: 10px;
 }
 
-.list-item-date {
-    float: left;
+.list-header {
+    border: 1px solid black;
 }
+
+/* .list-item-date {
+    float: left;
+} */
 
 .list-item-delete {
     position: relative;
     /* border: 1px  solid grey; */
 }
 
-.list-item-delete::before, .list-item-delete::after {
+/* .list-item-delete::before, .list-item-delete::after {
     position: absolute;
     width: 5px;
     height:  30px;
@@ -35,8 +39,24 @@
 
 .list-item-delete::before {
     transform: rotate(-45deg);
+} */
+
+.list-item-delete {
+    background-color: red;
 }
 
 .list-item-checked {
     background-color: aquamarine;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    padding: 10px;
+}
+
+td.list-item-text {
+    width: 100%;
 }

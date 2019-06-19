@@ -23,6 +23,9 @@ class List {
     _render() {
         //this should be done through DOM methods?
         this.$el.innerHTML = '';
+        this.table = document.createElement('table');
+        this._addHeader();
+        this.$el.appendChild(this.table);
         let i = 0;
         while (this.data[i]) {
             this._renderItem(this.data[i], i);
@@ -30,19 +33,34 @@ class List {
         }
     }
 
+    _addHeader() {
+        let header = document.createElement('tr');
+        header.classList.add('list-header');
+        let headerDate = this._getNewTd({}, 'header-date');
+        let headerText = this._getNewTd({}, 'header-text');
+
+        headerDate.innerHTML = 'Date';
+        headerText.innerHTML = 'Text';
+
+        header.appendChild(headerDate);
+        header.appendChild(headerText);
+
+        this.table.appendChild(header);
+    }
+
     /**
      * appends one item to the list
      * @param {obj} item 
      */
     _renderItem(item, index) {
-        let $newItem = document.createElement('div');
+        let $newItem = document.createElement('tr');
         $newItem.classList.add('list-item');
         if (item.checked) {
             $newItem.classList.add('list-item-checked')};
 
-        let $itemDate = this._getNewDiv(item, 'date');
-        let $itemText = this._getNewDiv(item, 'text');
-        let $itemDelete = this._getNewDiv();
+        let $itemDate = this._getNewTd(item, 'date');
+        let $itemText = this._getNewTd(item, 'text');
+        let $itemDelete = this._getNewTd();
 
         $newItem.appendChild($itemDate);
         $newItem.appendChild($itemText);
@@ -50,7 +68,7 @@ class List {
 
         $newItem.setAttribute('data-index', index);
 
-        this.$el.appendChild($newItem);
+        this.table.appendChild($newItem);
     }
     
     /**
@@ -59,13 +77,13 @@ class List {
      * @param {String} className 
      * @returns {htmlEl} $newDiv
      */
-    _getNewDiv(item = {}, className = 'delete') {
-        let $newDiv = document.createElement('div');
-        $newDiv.classList.add('list-item-' + className);
-        if (item[className]) {
-            $newDiv.innerHTML = item[className];
+    _getNewTd(item = {}, className = 'delete') {
+        let $newTd = document.createElement('td');
+        $newTd.classList.add('list-item-' + className);
+        if (className in item) {
+            $newTd.innerHTML = item[className];
         };
-        return $newDiv;
+        return $newTd;
     }
 
     /**
@@ -82,19 +100,32 @@ class List {
     _onClick(e) {
         if (e.target.classList.contains('list-item-delete')) {
             this.deleteItem(e.target.parentNode);
-        } else {
-            this.checkItem(e.target);
+        } else if (e.target.classList.contains('list-item-header-date')) {
+            this.sortDataByDate();
+        } else if (e.target.classList.contains('list-item-header-text')) {
+            this.sortDataByText();
         }
 
         
     }
 
     /**
-     * sorts data by field, calls render
+     * sorts data by text, reverses data and call render
+     */
+    sortDataByText() {
+        this.data.sort((a, b) => a.text > b.text);
+        this.data.reverse();
+        this._render();
+    }
+    /**
+     * sorts data by date, reverses data and calls render
      * @param {String} field
      */
-    sortDataBy(field) {
-        //....
+    sortDataByDate() {
+        this.data.sort((a, b) =>
+            CustomDate.compareDates(a.date, b.date)
+        )
+        this.data.reverse();
         this._render();
     }
 
