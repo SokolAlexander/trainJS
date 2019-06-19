@@ -42,12 +42,12 @@ class App {
                                                 value: today
                                             },
                                             {                                                
-                                                type: 'button', 
-                                                value: 'drop'
-                                            },
-                                            {                                                
                                                 type: 'submit', 
                                                 value: 'filter'
+                                            },
+                                            {                                                
+                                                type: 'button', 
+                                                value: 'drop'
                                             }]);
 
         this._initEvents();

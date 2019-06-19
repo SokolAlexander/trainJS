@@ -7,7 +7,8 @@ td.list-item-header-date {
 }
 .list {
     border: 1px solid black;
-    width: 50%;
+    width: 60%;
+    min-width: 600px;
     padding: 30px;
     text-align: center;
     margin: auto;
@@ -30,7 +31,6 @@ td.list-item-header-date {
 
 .list-item-delete:hover {
     cursor: pointer;
-    outline: 1px solid black;
     opacity: 1;
     /* border: 1px  solid grey; */
 } 
@@ -39,24 +39,11 @@ td.list-item-header-date {
     transform: scale(0.9)
 }
 
-/* .list-item-delete::before, .list-item-delete::after {
-    position: absolute;
-    width: 5px;
-    height:  30px;
-    left: 340px;
-    top: -23px;
-    content: ' ';
-    background-color: red;
-    z-index: 100;
-    transform: rotate(45deg);
-}
-
-.list-item-delete::before {
-    transform: rotate(-45deg);
-} */
-
 .list-item-delete {
-    background-color: red;
+    width:  10%;
+    background-position: 50%;
+    background-image: url('./../../cross.svg');
+    background-repeat: no-repeat;
     opacity: 0.4;
 }
 
@@ -70,7 +57,7 @@ td {
 
 td.list-item-text,
 td.list-item-header-text {
-    width: 100%;
+    width: 60%;
 }
 
 .list-header {
@@ -83,13 +70,31 @@ td.list-item-header-text {
     background-color: rgb(255, 240, 221);
 }
 
+.list-item-header-date:active,
+.list-item-header-text:active {
+    transform: scale(0.97);
+}
+
 .list-item:hover {
     background-color: rgba(250, 235, 217, 0.432);
 }
 
 .list-item-check {
-    background-color: blue;
+    width: 10%;
+    background-position: 50%;
+    background-image: url('./../../checkmark.svg');
+    /* background-size: 30px; */
+    background-repeat: no-repeat;
     opacity: 0;
+}
+
+.list-item-check:hover {
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.list-item-check:active {
+    transform: scale(0.95);
 }
 
 .list-item-checked .list-item-check {

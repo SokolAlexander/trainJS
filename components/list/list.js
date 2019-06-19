@@ -121,7 +121,9 @@ class List {
             this.sortDataByDate();
         } else if (e.target.classList.contains('list-item-header-text')) {
             this.sortDataByText();
-        } else this.checkItem(e.target);
+        } else if (e.target.classList.contains('list-item-check')) {
+            this.checkItem(e.target); 
+        }
     }
 
     /**
