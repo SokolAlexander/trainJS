@@ -9,7 +9,7 @@ class App {
         this.$el = htmlEl;
 
         let data = [{date: '12.05.2014', text: 'asdgov', checked: false}, 
-                    {date: '12.05.2014', text: 'asdgov', checked: false}];
+                    {date: '12.05.2015', text: 'a', checked: true}];
         let today = CustomDate.getDateForForm();
         
         this.list = new List(this._getNewEl('div', 'list'), data);

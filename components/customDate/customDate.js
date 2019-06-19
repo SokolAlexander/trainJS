@@ -41,9 +41,19 @@ class CustomDate {
         let month2 = parseInt(date2.substr(3, 2));
         let year2 = parseInt(date2.substr(6, 4));
 
-        let res = year1 > year2 ? false :
-                  month1 > month2 ? false :
-                  day1 > day2 ? false : true;
+        console.log(day1+'.'+month1+'.'+year1);
+        console.log(day2+'.'+month2+'.'+year2);
+       
+        let res = true;
+
+        if (year1 > year2) res = false
+        else if (year1 === year2) {
+            if (month1 > month2) res = false
+            else if (month1 === month2) { 
+                if (day1 > day2) res = false
+            }
+        }
+
         return res;
     }
 }

@@ -10,11 +10,16 @@ class List {
     constructor(htmlEl, data) {
         this.$el = htmlEl;
         this.data = data;
-        //not sure whether to do this from constr or before first filtering
-        this.fullData = data;
 
         this._render();
         this._initEvents();
+    }
+
+    _setFullData() {
+        this.fullData = [];
+        this.data.forEach((el, i) => {
+            this.fullData[i] = this.data[i]           
+        });
     }
 
     /**
@@ -104,9 +109,7 @@ class List {
             this.sortDataByDate();
         } else if (e.target.classList.contains('list-item-header-text')) {
             this.sortDataByText();
-        }
-
-        
+        } else this.checkItem(e.target);
     }
 
     /**
@@ -119,7 +122,6 @@ class List {
     }
     /**
      * sorts data by date, reverses data and calls render
-     * @param {String} field
      */
     sortDataByDate() {
         this.data.sort((a, b) => {
@@ -133,12 +135,20 @@ class List {
      * filters data
      */
     filterData(e) {
+        this._setFullData();
         let dateTo = e.detail.dateTo;
         let dateFrom = e.detail.dateFrom;
+        let substring = e.detail.text;
         this.data = this.data.filter(item => {
             return (CustomDate.compareDates(dateFrom, item.date) &&
-                    CustomDate.compareDates(item.date, dateTo))
+                    CustomDate.compareDates(item.date, dateTo))// &&
+                    //item.text.indexOf(substr) !== -1)
         });
+        this._render();
+    }
+
+    dropFilters() {
+        this.data = this.fullData;
         this._render();
     }
 
