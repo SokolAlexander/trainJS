@@ -15,11 +15,13 @@ class App {
         this.formAdd = new Form(this._getNewEl('form', 'form-add'), 
                                             [{
                                                 type: 'text', 
-                                                placeholder: 'text goes '
+                                                placeholder: 'text goes ',
+                                                required: 'true'
                                             },
                                             {                                                
                                                 type: 'date', 
-                                                value: today
+                                                value: today,
+                                                required: 'true'
                                             },
                                             {                                                
                                                 type: 'submit', 

@@ -18,9 +18,32 @@
     border-top: 3px solid black;
 }
 
+.form-filter .inputs-wrap {
+    width: 1000px;
+}
+
 input {
     width: 150px;
     height: 25px;
     margin: 40px;
+    display: inline-block;
 }
 
+input[type=submit],
+input[type=button] {
+    height: 30px;
+    background: none;
+    box-shadow: 0;
+    border: 2px solid rgb(84, 162, 235);
+    cursor: pointer;
+}
+
+input[type=submit]:hover,
+input[type=button]:hover {
+    background-color: rgb(215, 238, 243);
+}
+
+input[type=submit]:active,
+input[type=button]:active {
+    transform: scale(0.95);
+}

@@ -1,3 +1,10 @@
+table {
+    border-collapse: collapse;
+}
+
+td.list-item-header-date {
+    min-width: 100px;
+}
 .list {
     border: 1px solid black;
     width: 50%;
@@ -8,23 +15,28 @@
     margin-bottom: 10px; 
 }
 
-
 .list-item {
-    border: 1px solid green;
+    border-bottom: 1px solid green;
     padding: 10px;
 }
 
 .list-header {
-    border: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 /* .list-item-date {
     float: left;
 } */
 
-.list-item-delete {
-    position: relative;
+.list-item-delete:hover {
+    cursor: pointer;
+    outline: 1px solid black;
+    opacity: 1;
     /* border: 1px  solid grey; */
+} 
+
+.list-item-delete:active {
+    transform: scale(0.9)
 }
 
 /* .list-item-delete::before, .list-item-delete::after {
@@ -45,21 +57,19 @@
 
 .list-item-delete {
     background-color: red;
+    opacity: 0.4;
 }
 
 .list-item-checked {
-    background-color: aquamarine;
-}
-
-table {
-    border-collapse: collapse;
+    background-color: rgb(216, 240, 250);
 }
 
 td {
     padding: 10px;
 }
 
-td.list-item-text {
+td.list-item-text,
+td.list-item-header-text {
     width: 100%;
 }
 
@@ -70,13 +80,18 @@ td.list-item-text {
 .list-item-header-date:hover,
 .list-item-header-text:hover {
     cursor: pointer;
-    background-color: antiquewhite;
+    background-color: rgb(255, 240, 221);
 }
 
 .list-item:hover {
-    background-color: aliceblue;
+    background-color: rgba(250, 235, 217, 0.432);
 }
 
-.list-item-checked:hover {
-    background-color: azure;
+.list-item-check {
+    background-color: blue;
+    opacity: 0;
+}
+
+.list-item-checked .list-item-check {
+    opacity: 1;
 }

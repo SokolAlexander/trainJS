@@ -34,9 +34,9 @@ class List {
     _render() {
         //this should be done through DOM methods?
         this.$el.innerHTML = '';
-        this.table = document.createElement('table');
+        this.$table = document.createElement('table');
         this._addHeader();
-        this.$el.appendChild(this.table);
+        this.$el.appendChild(this.$table);
         let i = 0;
         while (this.data[i]) {
             this._renderItem(this.data[i], i);
@@ -45,20 +45,22 @@ class List {
     }
 
     _addHeader() {
-        let header = document.createElement('tr');
-        header.classList.add('list-header');
-        let headerDate = this._getNewTd({}, 'header-date');
-        let headerText = this._getNewTd({}, 'header-text');
-        let headerDelete = this._getNewTd({}, 'header-delete');
+        let $header = document.createElement('tr');
+        $header.classList.add('list-header');
+        let $headerCheck = this._getNewTd({}, 'header-check');
+        let $headerDate = this._getNewTd({}, 'header-date');
+        let $headerText = this._getNewTd({}, 'header-text');
+        let $headerDelete = this._getNewTd({}, 'header-delete');
 
-        headerDate.innerHTML = 'Date';
-        headerText.innerHTML = 'Text';
+        $headerDate.innerHTML = 'Date';
+        $headerText.innerHTML = 'Text';
 
-        header.appendChild(headerDate);
-        header.appendChild(headerText);
-        header.appendChild(headerDelete);
+        $header.appendChild($headerCheck);
+        $header.appendChild($headerDate);
+        $header.appendChild($headerText);
+        $header.appendChild($headerDelete);
 
-        this.table.appendChild(header);
+        this.$table.appendChild($header);
     }
 
     /**
@@ -71,17 +73,19 @@ class List {
         if (item.checked) {
             $newItem.classList.add('list-item-checked')};
 
+        let $itemCheck =  this._getNewTd(item, 'check');
         let $itemDate = this._getNewTd(item, 'date');
         let $itemText = this._getNewTd(item, 'text');
         let $itemDelete = this._getNewTd();
 
+        $newItem.appendChild($itemCheck);
         $newItem.appendChild($itemDate);
         $newItem.appendChild($itemText);
         $newItem.appendChild($itemDelete);
 
         $newItem.setAttribute('data-index', index);
 
-        this.table.appendChild($newItem);
+        this.$table.appendChild($newItem);
     }
     
     /**
