@@ -1,18 +1,26 @@
-.form-add {
-    width: 70%;
+.form {
+    width: 95%;
+    min-width: 760px;
     padding: 20px;
     margin: auto;
-    border: 2px solid blue;
+}
+
+.inputs-wrap {
+    margin: auto;
+    width: 760px;
+}
+
+.form-add {
+    border-bottom: 2px solid black;
 }
 
 .form-filter {
-    width: 100%;
-    padding: 10px;
-    border: 3px dashed red;
+    border-top: 3px solid black;
 }
 
 input {
-    width: 26%;
-    margin: 20px;
+    width: 150px;
+    height: 25px;
+    margin: 40px;
 }
 

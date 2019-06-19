@@ -9,7 +9,7 @@ class Form {
      */
     constructor(htmlEl, ...args) {
         this.$el = htmlEl;
-        this.inputs = args;
+        this.inputs = args[0];
         this._render();
         this._initEvents();
     }
@@ -19,12 +19,15 @@ class Form {
      */
     _render() {
         this.$el.innerHTML = '';
+
+        this.$div = document.createElement('div');
+        this.$div.classList.add('inputs-wrap');
+        this.$el.appendChild(this.$div);
         if (this.inputs[0]) {
-        this.inputs[0].forEach(element => {
-            this._addInput(element.type, element.value, element.label);
+        this.inputs.forEach(element => {
+            this._addInput(element);
         });
         }
-        this._addInput('submit', 'Добавить');
     }
 
     /**
@@ -32,14 +35,15 @@ class Form {
      * @param {String} type
      * @param {String} value
      */
-    _addInput(type, value) {
-        let className = 'form-input-' + type;
+    _addInput(input) {
+        let className = 'form-input-' + input.type;
         let $newInput = document.createElement('input');
-        $newInput.setAttribute('type', type);
         $newInput.classList.add(className);
-        $newInput.value = value;
-        $newInput.setAttribute('required', true);
-        this.$el.appendChild($newInput);
+        
+        for (let key in input) {
+            $newInput.setAttribute(key, input[key]);
+        }
+        this.$div.appendChild($newInput);
     }
 
     /**

@@ -49,12 +49,14 @@ class List {
         header.classList.add('list-header');
         let headerDate = this._getNewTd({}, 'header-date');
         let headerText = this._getNewTd({}, 'header-text');
+        let headerDelete = this._getNewTd({}, 'header-delete');
 
         headerDate.innerHTML = 'Date';
         headerText.innerHTML = 'Text';
 
         header.appendChild(headerDate);
         header.appendChild(headerText);
+        header.appendChild(headerDelete);
 
         this.table.appendChild(header);
     }

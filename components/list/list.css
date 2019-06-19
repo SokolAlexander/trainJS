@@ -4,6 +4,8 @@
     padding: 30px;
     text-align: center;
     margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px; 
 }
 
 
@@ -59,4 +61,22 @@ td {
 
 td.list-item-text {
     width: 100%;
+}
+
+.list-header {
+    font-weight: bold;
+}
+
+.list-item-header-date:hover,
+.list-item-header-text:hover {
+    cursor: pointer;
+    background-color: antiquewhite;
+}
+
+.list-item:hover {
+    background-color: aliceblue;
+}
+
+.list-item-checked:hover {
+    background-color: azure;
 }

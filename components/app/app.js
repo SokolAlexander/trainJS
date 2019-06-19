@@ -12,20 +12,24 @@ class App {
                     {date: '12.05.2015', text: 'a', checked: true}];
         let today = CustomDate.getDateForForm();
         
-        this.list = new List(this._getNewEl('div', 'list'), data);
         this.formAdd = new Form(this._getNewEl('form', 'form-add'), 
                                             [{
                                                 type: 'text', 
-                                                value: 'text goes '
+                                                placeholder: 'text goes '
                                             },
                                             {                                                
                                                 type: 'date', 
                                                 value: today
+                                            },
+                                            {                                                
+                                                type: 'submit', 
+                                                value: 'add'
                                             }]);
+        this.list = new List(this._getNewEl('div', 'list'), data);
         this.formFilter = new Form(this._getNewEl('form', 'form-filter'), 
                                             [{
                                                 type: 'text', 
-                                                value: 'text goes here2'
+                                                placeholder: 'text goes here2'
                                             },
                                             {                                                
                                                 type: 'date', 
@@ -38,6 +42,10 @@ class App {
                                             {                                                
                                                 type: 'button', 
                                                 value: 'drop'
+                                            },
+                                            {                                                
+                                                type: 'submit', 
+                                                value: 'filter'
                                             }]);
 
         this._initEvents();
