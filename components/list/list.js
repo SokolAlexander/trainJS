@@ -11,11 +11,16 @@ class List {
         this.$el = htmlEl;
         this.data = data;
         this._setFullData();
+        this.isSortedByDate = false;
+        this.isSortedByText = false;
 
         this._render();
         this._initEvents();
     }
 
+    /**
+     * saves all the data to restore it after filtering
+     */
     _setFullData() {
         this.fullData = [];
         this.data.forEach((el, i) => {
@@ -117,18 +122,32 @@ class List {
      * sorts data by text, reverses data and call render
      */
     sortDataByText() {
+        if (this.isSortedByText) {
+            this.data.reverse();
+            this._render();
+            return
+        };
         this.data.sort((a, b) => {
             return a.text > b.text ? 1 : -1});
+        this.isSortedByText = true;
+        this.isSortedByDate = false;
         this._render();
     }
     /**
      * sorts data by date, reverses data and calls render
      */
     sortDataByDate() {
+        if (this.isSortedByDate) {
+            this.data.reverse();
+            this._render();
+            return
+        };
         this.data.sort((a, b) => {
             console.log(a.date + ' ' + b.date + 'a<=b?' + CustomDate.compareDates(a.date, b.date));
            return CustomDate.compareDates(a.date, b.date) ? -1 : 1
         });
+        this.isSortedByDate = true;
+        this.isSortedByText = false;
         this._render();
     }
 
@@ -136,14 +155,13 @@ class List {
      * filters data
      */
     filterData(e) {
-        this._setFullData();
         let dateTo = e.detail.dateTo;
         let dateFrom = e.detail.dateFrom;
         let substring = e.detail.text;
         this.data = this.data.filter(item => {
             return (CustomDate.compareDates(dateFrom, item.date) &&
-                    CustomDate.compareDates(item.date, dateTo))// &&
-                    //item.text.indexOf(substr) !== -1)
+                    CustomDate.compareDates(item.date, dateTo) &&
+                    item.text.indexOf(substring) !== -1)
         });
         this._render();
     }
@@ -159,6 +177,9 @@ class List {
      */
     addItem(e) {
         this.data.push(e.detail);
+        this._setFullData();
+        this.isSortedByDate = false;
+        this.isSortedByText = false;
         this._render();
     }
 
@@ -169,6 +190,7 @@ class List {
     deleteItem(item) {
         this.data = this.data.filter((elem, i) => {
             return parseInt(item.dataset.index) !== i});
+        this._setFullData();
         this._render();
     }
 
@@ -181,6 +203,7 @@ class List {
             if (item.classList.contains('list-item')) break;
             else item = item.parentNode;
         }
+        if (item === this.$el) return;
         this.data[parseInt(item.dataset.index)].checked = 
             !this.data[parseInt(item.dataset.index)].checked;
         this._render();
