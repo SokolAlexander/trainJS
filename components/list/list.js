@@ -113,8 +113,8 @@ class List {
      * sorts data by text, reverses data and call render
      */
     sortDataByText() {
-        this.data.sort((a, b) => a.text > b.text);
-        this.data.reverse();
+        this.data.sort((a, b) => {
+            return a.text > b.text ? 1 : -1});
         this._render();
     }
     /**
@@ -122,10 +122,10 @@ class List {
      * @param {String} field
      */
     sortDataByDate() {
-        this.data.sort((a, b) =>
-            CustomDate.compareDates(a.date, b.date)
-        )
-        this.data.reverse();
+        this.data.sort((a, b) => {
+            console.log(a.date + ' ' + b.date + 'a<=b?' + CustomDate.compareDates(a.date, b.date));
+           return CustomDate.compareDates(a.date, b.date) ? -1 : 1
+        });
         this._render();
     }
 
