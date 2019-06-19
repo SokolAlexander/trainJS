@@ -116,7 +116,6 @@ class List {
      * @param {CustomEvent} e 
      */
     addItem(e) {
-        e.detail.date = CustomDate.getPrettyDate(new Date(e.detail.date));
         this.data.push(e.detail);
         this._render();
     }

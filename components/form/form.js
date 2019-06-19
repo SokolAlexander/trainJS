@@ -67,11 +67,12 @@ class Form {
         let textValue = this.$el.querySelector('input[type="text"]').value;
         let dateInputs = this.$el.querySelectorAll('input[type="date"]');
 
-        if (!dateInputs[1]) return {text: textValue, date: dateInputs[0].value}
+        if (!dateInputs[1]) return {text: textValue, 
+                                    date: CustomDate.getPrettyDate(new Date(dateInputs[0].value))}
         return {
             text: textValue,
-            dateFrom: dateInputs[0].value,
-            dateTo: dateInputs[1].value
+            dateFrom: CustomDate.getPrettyDate(new Date(dateInputs[0].value)),
+            dateTo: CustomDate.getPrettyDate(new Date(dateInputs[1].value))
         }
     }
 }
