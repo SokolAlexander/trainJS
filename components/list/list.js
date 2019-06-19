@@ -10,6 +10,7 @@ class List {
     constructor(htmlEl, data) {
         this.$el = htmlEl;
         this.data = data;
+        this._setFullData();
 
         this._render();
         this._initEvents();

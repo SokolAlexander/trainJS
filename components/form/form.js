@@ -48,7 +48,12 @@ class Form {
     _initEvents() {
         this.$el.addEventListener('submit', e => {
             e.preventDefault();
-            this._submitForm()})
+            this._submitForm()});
+        this.$el.addEventListener('click', e => {
+            if (e.target.classList.contains('form-input-button')) {
+                this._dropFilters();
+            }
+        })
     }
 
     /**
@@ -74,6 +79,11 @@ class Form {
             dateFrom: CustomDate.getPrettyDate(new Date(dateInputs[0].value)),
             dateTo: CustomDate.getPrettyDate(new Date(dateInputs[1].value))
         }
+    }
+
+    _dropFilters() {
+        let dropFilters = new CustomEvent('dropFilters', {bubbles: true});
+        this.$el.dispatchEvent(dropFilters);
     }
 }
 

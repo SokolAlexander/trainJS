@@ -34,6 +34,10 @@ class App {
                                             {                                                
                                                 type: 'date', 
                                                 value: today
+                                            },
+                                            {                                                
+                                                type: 'button', 
+                                                value: 'drop'
                                             }]);
 
         this._initEvents();
@@ -59,6 +63,10 @@ class App {
             } else {
                 this.list.filterData(e);
             }
+        });
+
+        this.$el.addEventListener('dropFilters', e => {
+            this.list.dropFilters();
         });
     }
 }
