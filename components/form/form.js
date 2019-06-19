@@ -30,7 +30,7 @@ class Form {
     /**
      * adds one input of type, adds a className
      * @param {String} type
-     * @param {String} Value
+     * @param {String} value
      */
     _addInput(type, value) {
         let className = 'form-input-' + type;

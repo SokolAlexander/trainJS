@@ -8,8 +8,9 @@ class App {
     constructor(htmlEl) {
         this.$el = htmlEl;
 
-        let data = [{date: '12-05-14', text: 'asdgov', checked: false}, 
-                    {date: '12-05-14', text: 'asdgov', checked: false}];
+        let data = [{date: '12.05.2014', text: 'asdgov', checked: false}, 
+                    {date: '12.05.2014', text: 'asdgov', checked: false}];
+        let today = CustomDate.getDateForForm();
         
         this.list = new List(this._getNewEl('div', 'list'), data);
         this.formAdd = new Form(this._getNewEl('form', 'form-add'), 
@@ -19,7 +20,7 @@ class App {
                                             },
                                             {                                                
                                                 type: 'date', 
-                                                value: '12-01-01'
+                                                value: today
                                             }]);
         this.formFilter = new Form(this._getNewEl('form', 'form-filter'), 
                                             [{
@@ -28,11 +29,11 @@ class App {
                                             },
                                             {                                                
                                                 type: 'date', 
-                                                value: '12-01-01'
+                                                value: today
                                             },
                                             {                                                
                                                 type: 'date', 
-                                                value: '12-01-02'
+                                                value: today
                                             }]);
 
         this._initEvents();
@@ -53,10 +54,7 @@ class App {
 
     _initEvents() {
         this.$el.addEventListener('formSubmit', e => {
-
-            console.log(e.target)
             if (e.target === this.formAdd.$el) {
-                debugger
                 this.list.addItem(e);
             } else {
                 this.list.filterData(e);

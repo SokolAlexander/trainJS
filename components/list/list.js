@@ -38,7 +38,6 @@ class List {
         let $newItem = document.createElement('div');
         $newItem.classList.add('list-item');
         if (item.checked) {
-            console.log(item);
             $newItem.classList.add('list-item-checked')};
 
         let $itemDate = this._getNewDiv(item, 'date');
@@ -109,7 +108,7 @@ class List {
             return (CustomDate.compareDates(dateFrom, item.date) &&
                     CustomDate.compareDates(item.date, dateTo))
         });
-        console.log(e.detail.dateTo, e.detail.dateFrom);
+        this._render();
     }
 
     /**
@@ -117,9 +116,8 @@ class List {
      * @param {CustomEvent} e 
      */
     addItem(e) {
-        e.detail.date = CustomDate.getFormattedDate(new Date(e.detail.date));
+        e.detail.date = CustomDate.getPrettyDate(new Date(e.detail.date));
         this.data.push(e.detail);
-        console.log(e.detail);
         this._render();
     }
 
