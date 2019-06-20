@@ -72,6 +72,10 @@ td {
     background-color: rgba(193, 241, 153, 0.733);
 }
 
+.list-item-header-check {
+    width: 10%;
+}
+
 .list-item-check {
     width: 10%;
     background-position: 50%;

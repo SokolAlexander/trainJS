@@ -13,7 +13,7 @@ class App {
 
         let formAddProps = [{
                             type: 'text', 
-                            placeholder: 'text goes ',
+                            placeholder: 'Добавить',
                             required: 'true'
                         },
                         {                                                
@@ -28,7 +28,7 @@ class App {
 
         let formFilterProps = [{
                                     type: 'text', 
-                                    placeholder: 'text goes here2'
+                                    placeholder: 'Поиск по тексту'
                                 },
                                 {                                                
                                     type: 'date', 
