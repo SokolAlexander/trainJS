@@ -6,26 +6,21 @@ class LStorage {
      * saves the data to localStorage
      * @param {Object} data 
      */
-    static setData(data = {}) {
+    static setData(item) {
         LStorage.checkStorage();
-        LStorage.clear();
-
-        if (Object.keys(data).length === 0) {
-            return;
+        //LStorage.clear();
+        let name = item.index + '-js-app';
+        let value = '';
+        for (let key in item) {
+            value += `${key}:${item[key]};`
         }
+        window.localStorage.setItem(name, value);
+    }
 
-        let dataToStore = data.map((elem, i) => {
-            let res = '';
-            for (let key in elem) {
-                res += key + ':' + elem[key] + ';';
-            }
-            return res;
-        });
-        
-        dataToStore.forEach((elem, i) => {
-            i += '-js-app';
-            window.localStorage.setItem(i, elem);
-        });
+    static removeData(index) {
+        let name = index + '-js-app';
+        window.localStorage.removeItem(name);
+
     }
 
     /**

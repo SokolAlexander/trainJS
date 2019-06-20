@@ -26,7 +26,6 @@ class List {
         this.data.forEach((el, i) => {
             this.fullData[i] = this.data[i]           
         });
-        LStorage.setData(this.fullData);
     }
 
     /**
@@ -72,7 +71,7 @@ class List {
      * @param {Object} item
      * @param {number} index 
      */
-    _renderItem(item, index) {
+    _renderItem(item) {
         let $newItem = document.createElement('tr');
         $newItem.classList.add('list-item');
         if (item.checked) {
@@ -88,7 +87,7 @@ class List {
         $newItem.appendChild($itemText);
         $newItem.appendChild($itemDelete);
 
-        $newItem.setAttribute('data-index', index);
+        $newItem.setAttribute('data-index', item.index);
 
         this.$table.appendChild($newItem);
     }
@@ -207,11 +206,24 @@ class List {
      * @param {CustomEvent} e 
      */
     addItem(e) {
+        let newItem = e.detail;
+        newItem.index = this._getItemIndex();
         this.data.push(e.detail);
         this._setFullData();
         this.isSortedByDate = false;
         this.isSortedByText = false;
+        
+        LStorage.setData(newItem);
+
         this._render();
+    }
+
+    _getItemIndex() {
+       let maxIndex = 0;
+       this.fullData.forEach(elem => {
+           if (parseInt(elem.index) >= maxIndex) maxIndex = parseInt(elem.index) + 1;
+       }); 
+       return maxIndex;
     }
 
     /**
@@ -219,8 +231,10 @@ class List {
      * @param {htmlEl} item 
      */
     deleteItem(item) {
-        this.data = this.data.filter((elem, i) => {
-            return parseInt(item.dataset.index) !== i});
+        this.data = this.data.filter((elem) => {
+            return parseInt(item.dataset.index) !== elem.index});
+
+        LStorage.removeData(parseInt(item.dataset.index));
         this._setFullData();
         this._render();
     }
@@ -236,8 +250,13 @@ class List {
         }
         if (item === this.$el) return;
 
-        this.data[parseInt(item.dataset.index)].checked = 
-            this.data[parseInt(item.dataset.index)].checked ? '' : 1;
+        this.data.forEach(elem => {
+            if (parseInt(elem.index) === parseInt(item.dataset.index)) {
+                elem.checked = elem.checked ? '' : 1;
+                LStorage.setData(elem);
+            }
+        });
+        
         this._setFullData();
         this._render();
     }

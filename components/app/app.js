@@ -7,9 +7,9 @@ class App {
      */
     constructor(htmlEl) {
         this.$el = htmlEl;
-
         let today = CustomDate.getDateForForm();
         let data = LStorage.getData();
+        //let data = [];
 
         let formAddProps = [{
                             type: 'text', 
