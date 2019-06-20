@@ -151,7 +151,6 @@ class List {
             return
         };
         this.data.sort((a, b) => {
-            console.log(a.date + ' ' + b.date + 'a<=b?' + CustomDate.compareDates(a.date, b.date));
            return CustomDate.compareDates(a.date, b.date) ? -1 : 1
         });
         this.isSortedByDate = true;
@@ -163,8 +162,8 @@ class List {
      * filters data
      */
     filterData(e) {
-        let dateTo = e.detail.dateTo;
-        let dateFrom = e.detail.dateFrom;
+        let {dateFrom, dateTo} = this._checkDates(e.detail.dateFrom, e.detail.dateTo);
+
         let substring = e.detail.text;
         this.data = this.data.filter(item => {
             return (CustomDate.compareDates(dateFrom, item.date) &&
@@ -172,6 +171,15 @@ class List {
                     item.text.indexOf(substring) !== -1)
         });
         this._render();
+    }
+
+    _checkDates(dateFrom, dateTo) {
+        if (!CustomDate.compareDates(dateFrom, dateTo)) {
+            let buffer = dateFrom;
+            dateFrom = dateTo;
+            dateTo = buffer;
+        }
+        return {dateFrom, dateTo}
     }
 
     dropFilters() {
@@ -212,8 +220,9 @@ class List {
             else item = item.parentNode;
         }
         if (item === this.$el) return;
+
         this.data[parseInt(item.dataset.index)].checked = 
-            !this.data[parseInt(item.dataset.index)].checked;
+            this.data[parseInt(item.dataset.index)].checked ? '' : 1;
         this._render();
     }
 }

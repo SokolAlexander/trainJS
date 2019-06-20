@@ -23,6 +23,7 @@ class Form {
         this.$div = document.createElement('div');
         this.$div.classList.add('inputs-wrap');
         this.$el.appendChild(this.$div);
+
         if (this.inputs[0]) {
         this.inputs.forEach(element => {
             this._addInput(element);
@@ -43,6 +44,7 @@ class Form {
         for (let key in input) {
             $newInput.setAttribute(key, input[key]);
         }
+        
         this.$div.appendChild($newInput);
     }
 

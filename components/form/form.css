@@ -19,10 +19,6 @@
     border-top: 3px solid black;
 }
 
-.form-filter .inputs-wrap {
-    width: 1000px;
-}
-
 input {
     width: 150px;
     height: 25px;

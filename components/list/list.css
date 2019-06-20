@@ -2,9 +2,10 @@ table {
     border-collapse: collapse;
 }
 
-td.list-item-header-date {
-    min-width: 100px;
+td {
+    padding: 10px;
 }
+
 .list {
     border: 1px solid black;
     width: 60%;
@@ -16,27 +17,38 @@ td.list-item-header-date {
     margin-bottom: 10px; 
 }
 
+.list-header {
+    border-bottom: 1px solid black;
+    font-weight: bold;
+}
+
 .list-item {
-    border-bottom: 1px solid green;
+    border-bottom: 1px solid grey;
     padding: 10px;
 }
 
-.list-header {
-    border-bottom: 1px solid black;
+.list-item:hover {
+    background-color: rgba(250, 235, 217, 0.432);
 }
 
-/* .list-item-date {
-    float: left;
-} */
+.list-item-header-date {
+    min-width: 100px;
+}
 
-.list-item-delete:hover {
+.list-item-header-date:hover,
+.list-item-header-text:hover {
     cursor: pointer;
-    opacity: 1;
-    /* border: 1px  solid grey; */
-} 
+    background-color: rgb(250, 220, 181);
+}
 
-.list-item-delete:active {
-    transform: scale(0.9)
+.list-item-header-date:active,
+.list-item-header-text:active {
+    transform: scale(0.97);
+}
+
+.list-item-text,
+.list-item-header-text {
+    width: 60%;
 }
 
 .list-item-delete {
@@ -47,43 +59,23 @@ td.list-item-header-date {
     opacity: 0.4;
 }
 
-.list-item-checked {
-    background-color: rgb(216, 240, 250);
-}
-
-td {
-    padding: 10px;
-}
-
-td.list-item-text,
-td.list-item-header-text {
-    width: 60%;
-}
-
-.list-header {
-    font-weight: bold;
-}
-
-.list-item-header-date:hover,
-.list-item-header-text:hover {
+.list-item-delete:hover {
     cursor: pointer;
-    background-color: rgb(255, 240, 221);
+    opacity: 1;
+} 
+
+.list-item-delete:active {
+    transform: scale(0.9)
 }
 
-.list-item-header-date:active,
-.list-item-header-text:active {
-    transform: scale(0.97);
-}
-
-.list-item:hover {
-    background-color: rgba(250, 235, 217, 0.432);
+.list-item-checked {
+    background-color: rgba(193, 241, 153, 0.733);
 }
 
 .list-item-check {
     width: 10%;
     background-position: 50%;
     background-image: url('./../../checkmark.svg');
-    /* background-size: 30px; */
     background-repeat: no-repeat;
     opacity: 0;
 }

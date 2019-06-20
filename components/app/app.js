@@ -8,10 +8,13 @@ class App {
     constructor(htmlEl) {
         this.$el = htmlEl;
 
-        let data = [{date: '12.05.2014', text: 'asdgov', checked: false}, 
-                    {date: '12.05.2015', text: 'a', checked: true}];
+        let data = [{date: '12.05.2014', text: 'asdgov', checked: 1}, 
+                     {date: '12.05.2015', text: 'a', checked: ''}];
+        LStorage.setData(data);
         let today = CustomDate.getDateForForm();
-        
+        data = LStorage.getData();
+        //LStorage.clear();
+ 
         this.formAdd = new Form(this._getNewEl('form', 'form-add'), 
                                             [{
                                                 type: 'text', 
@@ -25,7 +28,7 @@ class App {
                                             },
                                             {                                                
                                                 type: 'submit', 
-                                                value: 'add'
+                                                value: 'Добавить'
                                             }]);
         this.list = new List(this._getNewEl('div', 'list'), data);
         this.formFilter = new Form(this._getNewEl('form', 'form-filter'), 
@@ -43,11 +46,11 @@ class App {
                                             },
                                             {                                                
                                                 type: 'submit', 
-                                                value: 'filter'
+                                                value: 'Отфильтровать'
                                             },
                                             {                                                
                                                 type: 'button', 
-                                                value: 'drop'
+                                                value: 'Сбросить'
                                             }]);
 
         this._initEvents();

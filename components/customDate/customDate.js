@@ -40,10 +40,6 @@ class CustomDate {
         let day2 = parseInt(date2.substr(0, 2));
         let month2 = parseInt(date2.substr(3, 2));
         let year2 = parseInt(date2.substr(6, 4));
-
-        console.log(day1+'.'+month1+'.'+year1);
-        console.log(day2+'.'+month2+'.'+year2);
-       
         let res = true;
 
         if (year1 > year2) res = false
