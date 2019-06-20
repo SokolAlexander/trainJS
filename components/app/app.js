@@ -8,50 +8,48 @@ class App {
     constructor(htmlEl) {
         this.$el = htmlEl;
 
-        let data = [{date: '12.05.2014', text: 'asdgov', checked: 1}, 
-                     {date: '12.05.2015', text: 'a', checked: ''}];
-        LStorage.setData(data);
         let today = CustomDate.getDateForForm();
-        data = LStorage.getData();
-        //LStorage.clear();
+        let data = LStorage.getData();
+
+        let formAddProps = [{
+                            type: 'text', 
+                            placeholder: 'text goes ',
+                            required: 'true'
+                        },
+                        {                                                
+                            type: 'date', 
+                            value: today,
+                            required: 'true'
+                        },
+                        {                                                
+                            type: 'submit', 
+                            value: 'Добавить'
+                        }];
+
+        let formFilterProps = [{
+                                    type: 'text', 
+                                    placeholder: 'text goes here2'
+                                },
+                                {                                                
+                                    type: 'date', 
+                                    value: today
+                                },
+                                {                                                
+                                    type: 'date', 
+                                    value: today
+                                },
+                                {                                                
+                                    type: 'submit', 
+                                    value: 'Отфильтровать'
+                                },
+                                {                                                
+                                    type: 'button', 
+                                    value: 'Сбросить'
+                                }];
  
-        this.formAdd = new Form(this._getNewEl('form', 'form-add'), 
-                                            [{
-                                                type: 'text', 
-                                                placeholder: 'text goes ',
-                                                required: 'true'
-                                            },
-                                            {                                                
-                                                type: 'date', 
-                                                value: today,
-                                                required: 'true'
-                                            },
-                                            {                                                
-                                                type: 'submit', 
-                                                value: 'Добавить'
-                                            }]);
+        this.formAdd = new Form(this._getNewEl('form', 'form-add'), formAddProps);
         this.list = new List(this._getNewEl('div', 'list'), data);
-        this.formFilter = new Form(this._getNewEl('form', 'form-filter'), 
-                                            [{
-                                                type: 'text', 
-                                                placeholder: 'text goes here2'
-                                            },
-                                            {                                                
-                                                type: 'date', 
-                                                value: today
-                                            },
-                                            {                                                
-                                                type: 'date', 
-                                                value: today
-                                            },
-                                            {                                                
-                                                type: 'submit', 
-                                                value: 'Отфильтровать'
-                                            },
-                                            {                                                
-                                                type: 'button', 
-                                                value: 'Сбросить'
-                                            }]);
+        this.formFilter = new Form(this._getNewEl('form', 'form-filter'), formFilterProps);
 
         this._initEvents();
     }
@@ -60,7 +58,7 @@ class App {
      * creates, appends and returns html element with tag, adds a CSS className 
      * @param {string} tag 
      * @param {string} className
-     * @returns {htmlEl}
+     * @returns {htmlEl} new element
      */
     _getNewEl(tag, className) {
         let $newEl = document.createElement(tag);
@@ -69,6 +67,10 @@ class App {
         return $newEl;
     }
 
+    /**
+     * initialise event listeners for adding item, 
+     * filtering items, dropping filters, saviing data
+     */
     _initEvents() {
         this.$el.addEventListener('formSubmit', e => {
             if (e.target === this.formAdd.$el) {
@@ -81,6 +83,10 @@ class App {
         this.$el.addEventListener('dropFilters', e => {
             this.list.dropFilters();
         });
+
+        window.addEventListener('beforeunload', () => {
+            LStorage.setData(this.list.fullData);
+        })
     }
 }
 

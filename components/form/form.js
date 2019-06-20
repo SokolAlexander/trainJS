@@ -6,6 +6,7 @@ class Form {
     /**
      * Creates a form using htmlEl
      * @param {htmlEL} htmlEl 
+     * @param {Array} args inputs configuration 
      */
     constructor(htmlEl, ...args) {
         this.$el = htmlEl;
@@ -38,6 +39,7 @@ class Form {
      */
     _addInput(input) {
         let className = 'form-input-' + input.type;
+
         let $newInput = document.createElement('input');
         $newInput.classList.add(className);
         
@@ -49,7 +51,9 @@ class Form {
     }
 
     /**
-     * adds eventListener to stop page from refreshing on form submit
+     * adds eventListeners 
+     * to stop page from refreshing on form submit
+     * and for submitting form
      */
     _initEvents() {
         this.$el.addEventListener('submit', e => {
@@ -73,6 +77,7 @@ class Form {
 
     /**
      * gets values of inputs
+     * @returns {Object} values of inputs
      */
     _getFormData() {
         let textValue = this.$el.querySelector('input[type="text"]').value;
@@ -87,6 +92,9 @@ class Form {
         }
     }
 
+    /**
+     * dispatches  custom Event to drop filters
+     */
     _dropFilters() {
         let dropFilters = new CustomEvent('dropFilters', {bubbles: true});
         this.$el.dispatchEvent(dropFilters);

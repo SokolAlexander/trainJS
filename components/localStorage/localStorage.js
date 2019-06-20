@@ -2,21 +2,39 @@
 'use strict';
 
 class LStorage {
-    static setData(data) {
+    /**
+     * saves the data to localStorage
+     * @param {Object} data 
+     */
+    static setData(data = {}) {
+        LStorage.checkStorage();
+        LStorage.clear();
+
+        if (Object.keys(data).length === 0) {
+            return;
+        }
+
         let dataToStore = data.map((elem, i) => {
             let res = '';
             for (let key in elem) {
                 res += key + ':' + elem[key] + ';';
             }
             return res;
-        });       
+        });
+        
         dataToStore.forEach((elem, i) => {
             i += '-js-app';
             window.localStorage.setItem(i, elem);
         });
     }
 
+    /**
+     * gets data to display from localStorage
+     * @returns {Array}
+     */
     static getData() {
+        LStorage.checkStorage();
+
         let data = [];
         for (let key in window.localStorage) {
             if (key.indexOf('-js-app') === -1) continue;
@@ -38,32 +56,27 @@ class LStorage {
         return data;
     }
 
-    static removeData(data) {
-        data.foreach(elem => {
-            for (let key in elem) {
-                window.localStorage.removeItem(key);
-            }
-        })
-            
-    }
-
     static checkStorage() {
         try {
-            let storage = window.localStorage;
             let x = '__storage_test__';
-            storage.setItem(x, x);
-            storage.removeItem(x);
-            return true;
+            window.localStorage.setItem(x, x);
+            window.localStorage.removeItem(x);
+            return;
         }
-        catch(e) {
-            return e
+        catch(err) {
+            console.error('LocalStorage unavailable: ' + err);
         }
     }
 
+    /**
+     * deletes all the enties in localStorage object
+     * that were added by this app
+     */
     static clear() {
         for (let key in window.localStorage) {
-            //console.log(window.localStorage[key])
+            if (key.indexOf('-js-app') !== -1) {
             window.localStorage.removeItem(key);
+            }
         }
         console.log('Storage cleared')
     }

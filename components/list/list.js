@@ -44,6 +44,9 @@ class List {
         }
     }
 
+    /**
+     * adds header for the table
+     */
     _addHeader() {
         let $header = document.createElement('tr');
         $header.classList.add('list-header');
@@ -65,7 +68,8 @@ class List {
 
     /**
      * appends one item to the list
-     * @param {obj} item 
+     * @param {Object} item
+     * @param {number} index 
      */
     _renderItem(item, index) {
         let $newItem = document.createElement('tr');
@@ -127,7 +131,7 @@ class List {
     }
 
     /**
-     * sorts data by text, reverses data and call render
+     * sorts data by text or reverses data and calls render
      */
     sortDataByText() {
         if (this.isSortedByText) {
@@ -142,7 +146,7 @@ class List {
         this._render();
     }
     /**
-     * sorts data by date, reverses data and calls render
+     * sorts data by date or reverses data and calls render
      */
     sortDataByDate() {
         if (this.isSortedByDate) {
@@ -160,6 +164,7 @@ class List {
 
     /**
      * filters data
+     * @param {Event} EventObj
      */
     filterData(e) {
         let {dateFrom, dateTo} = this._checkDates(e.detail.dateFrom, e.detail.dateTo);
@@ -173,6 +178,12 @@ class List {
         this._render();
     }
 
+    /**
+     * Checks if  dateFrom < dateTo, swaps them otherwise
+     * @param {string} dateFrom 
+     * @param {string} dateTo
+     * @returns {string, string} 
+     */
     _checkDates(dateFrom, dateTo) {
         if (!CustomDate.compareDates(dateFrom, dateTo)) {
             let buffer = dateFrom;
@@ -182,6 +193,9 @@ class List {
         return {dateFrom, dateTo}
     }
 
+    /**
+     * drops filters annd calls render
+     */
     dropFilters() {
         this.data = this.fullData;
         this._render();

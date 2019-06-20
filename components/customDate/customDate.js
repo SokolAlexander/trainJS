@@ -4,9 +4,6 @@
  * a class for working with date
  */
 class CustomDate {
-    constructor() {
-    }
-
     /**
      * get date in format dd.mm.yyyy
      * @param {Date} date 
@@ -29,8 +26,8 @@ class CustomDate {
 
     /**
      * returns  true if date1 <= date2, false otherwise
-     * @param {string} date1 
-     * @param {string} date2 
+     * @param {string} date1 in format DD-MM-YYYY
+     * @param {string} date2 in format DD-MM-YYYY
      */
     static compareDates(date1, date2) {
         let day1 = parseInt(date1.substr(0, 2));
@@ -49,7 +46,6 @@ class CustomDate {
                 if (day1 > day2) res = false
             }
         }
-
         return res;
     }
 }
