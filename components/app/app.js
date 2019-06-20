@@ -83,10 +83,6 @@ class App {
         this.$el.addEventListener('dropFilters', e => {
             this.list.dropFilters();
         });
-
-        window.addEventListener('beforeunload', () => {
-            LStorage.setData(this.list.fullData);
-        })
     }
 }
 

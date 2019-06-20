@@ -26,6 +26,7 @@ class List {
         this.data.forEach((el, i) => {
             this.fullData[i] = this.data[i]           
         });
+        LStorage.setData(this.fullData);
     }
 
     /**
@@ -237,6 +238,7 @@ class List {
 
         this.data[parseInt(item.dataset.index)].checked = 
             this.data[parseInt(item.dataset.index)].checked ? '' : 1;
+        this._setFullData();
         this._render();
     }
 }
