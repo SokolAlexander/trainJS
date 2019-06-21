@@ -20,7 +20,6 @@ class LStorage {
     static removeData(index) {
         let name = index + '-js-app';
         window.localStorage.removeItem(name);
-
     }
 
     /**

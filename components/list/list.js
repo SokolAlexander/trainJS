@@ -232,9 +232,11 @@ class List {
      */
     deleteItem(item) {
         this.data = this.data.filter((elem) => {
-            return parseInt(item.dataset.index) !== elem.index});
+            debugger
+            return parseInt(item.dataset.index) !== parseInt(elem.index)});
 
         LStorage.removeData(parseInt(item.dataset.index));
+
         this._setFullData();
         this._render();
     }

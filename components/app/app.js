@@ -8,6 +8,7 @@ class App {
     constructor(htmlEl) {
         this.$el = htmlEl;
         let today = CustomDate.getDateForForm();
+        //LStorage.clear();
         let data = LStorage.getData();
         //let data = [];
 
