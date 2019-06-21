@@ -10,12 +10,13 @@
     <div>Hello!</div>
     <div class="app js-app"></div>
 
-    <script src="/components/customDate/customDate.js"></script>
-    <script src="/components/localStorage/localStorage.js"></script>
-    <script src="/components/app/app.js"></script>
-    <script src="/components/form/form.js"></script>
-    <script src="/components/list/list.js"></script>
-    <script>
+    <script src="/components/customDate/customDate.js" type="module"></script>
+    <script src="/components/localStorage/localStorage.js" type="module"></script>
+    <script src="/components/app/app.js" type="module"></script>
+    <script src="/components/form/form.js" type="module"></script>
+    <script src="/components/list/list.js" type="module"></script>
+    <script type="module">
+        import {App} from './components/app/app.js';
         let app = new App(document.querySelector('.js-app'));
     </script>
 </body>

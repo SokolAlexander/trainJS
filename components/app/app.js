@@ -1,6 +1,9 @@
-(function () {
-'use strict';
-class App {
+import {List} from '../list/list.js';
+import {Form} from '../form/form.js';
+import {CustomDate} from '../customDate/customDate.js';
+import {LStorage} from '../localStorage/localStorage.js';
+
+export class App {
     /**
      * creates a js application using html element
      * @param {htmlEl} htmlEl 
@@ -85,7 +88,3 @@ class App {
         });
     }
 }
-
-//export
-window.App = App;
-})();

@@ -1,7 +1,7 @@
-(function () {
-'use strict';
+import {CustomDate} from '../customDate/customDate.js';
+import {LStorage} from '../localStorage/localStorage.js';
 
-class List {
+export class List {
     /**
      * Creates a list using htmlEl
      * @param {htmlEL} htmlEl
@@ -261,7 +261,3 @@ class List {
         this._render();
     }
 }
-
-//export
-window.List = List;
-})();

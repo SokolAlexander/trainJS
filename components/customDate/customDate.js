@@ -1,9 +1,7 @@
-(function() {
-'use strict';
 /**
  * a class for working with date
  */
-class CustomDate {
+export class CustomDate {
     /**
      * get date in format dd.mm.yyyy
      * @param {Date} date 
@@ -49,7 +47,3 @@ class CustomDate {
         return res;
     }
 }
-
-//export
-window.CustomDate = CustomDate;
-})();

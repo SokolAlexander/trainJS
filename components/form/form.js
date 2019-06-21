@@ -1,8 +1,6 @@
-(function () {
-'use strict';
+import {CustomDate} from '../customDate/customDate.js';
 
-
-class Form {
+export class Form {
     /**
      * Creates a form using htmlEl
      * @param {htmlEL} htmlEl 
@@ -100,7 +98,3 @@ class Form {
         this.$el.dispatchEvent(dropFilters);
     }
 }
-
-//export
-window.Form = Form;
-})();

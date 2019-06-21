@@ -1,7 +1,4 @@
-(function() {
-'use strict';
-
-class LStorage {
+export class LStorage {
     /**
      * saves the data to localStorage
      * @param {Object} data 
@@ -76,7 +73,3 @@ class LStorage {
         console.log('Storage cleared')
     }
 }
-
-//export
-window.LStorage = LStorage;
-})();
