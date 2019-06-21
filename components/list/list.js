@@ -126,7 +126,7 @@ export class List {
         } else if (e.target.classList.contains('list-item-header-text')) {
             this.sortDataByText();
         } else if (e.target.classList.contains('list-item-check')) {
-            this.checkItem(e.target); 
+            this.checkItem(e.target.parentNode); 
         }
     }
 
@@ -232,7 +232,7 @@ export class List {
      */
     deleteItem(item) {
         this.data = this.data.filter((elem) => {
-            return parseInt(item.dataset.index) !== elem.index});
+            return parseInt(item.dataset.index) !== parseInt(elem.index)});
 
         LStorage.removeData(parseInt(item.dataset.index));
         this._setFullData();
@@ -244,12 +244,6 @@ export class List {
      * @param {htmlEl} item 
      */
     checkItem(item) {
-        while (item !== this.$el) {
-            if (item.classList.contains('list-item')) break;
-            else item = item.parentNode;
-        }
-        if (item === this.$el) return;
-
         this.data.forEach(elem => {
             if (parseInt(elem.index) === parseInt(item.dataset.index)) {
                 elem.checked = elem.checked ? '' : 1;

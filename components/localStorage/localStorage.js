@@ -30,6 +30,7 @@ export class LStorage {
         let data = [];
         for (let key in window.localStorage) {
             if (key.indexOf('-js-app') === -1) continue;
+            
             let i = parseInt(key);
             data[i] = {};
             let start = 0;
