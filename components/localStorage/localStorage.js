@@ -28,10 +28,10 @@ export class LStorage {
         LStorage.checkStorage();
 
         let data = [];
+        let i = 0;
         for (let key in window.localStorage) {
             if (key.indexOf('-js-app') === -1) continue;
-            
-            let i = parseInt(key);
+
             data[i] = {};
             let start = 0;
             let dd = window.localStorage[key].indexOf(':', start);
@@ -45,6 +45,7 @@ export class LStorage {
                 dd = window.localStorage[key].indexOf(':', start);
                 pause = window.localStorage[key].indexOf(';', start);
             }
+            i++;
         }
         return data;
     }
