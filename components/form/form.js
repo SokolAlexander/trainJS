@@ -33,7 +33,6 @@ export class Form {
     /**
      * adds one input of type, adds a className
      * @param {String} type
-     * @param {String} value
      */
     _addInput(input) {
         let className = 'form-input-' + input.type;
@@ -69,6 +68,7 @@ export class Form {
      */
     _submitForm() {
         let formData = this._getFormData();
+        this._dropInputs();
         let formSubmit = new CustomEvent('formSubmit', {bubbles: true, detail: formData});
         this.$el.dispatchEvent(formSubmit);
     }
@@ -88,6 +88,11 @@ export class Form {
             dateFrom: CustomDate.getPrettyDate(new Date(dateInputs[0].value)),
             dateTo: CustomDate.getPrettyDate(new Date(dateInputs[1].value))
         }
+    }
+
+    _dropInputs() {
+        let textInput = this.$el.querySelector('input[type=text]');
+        textInput.value = '';
     }
 
     /**

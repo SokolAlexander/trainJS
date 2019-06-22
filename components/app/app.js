@@ -1,7 +1,7 @@
 import {List} from '../list/list.js';
 import {Form} from '../form/form.js';
-import {CustomDate} from '../customDate/customDate.js';
 import {LStorage} from '../localStorage/localStorage.js';
+import {CustomDate} from '../customDate/customDate.js';
 
 export class App {
     /**
@@ -10,17 +10,18 @@ export class App {
      */
     constructor(htmlEl) {
         this.$el = htmlEl;
-        let today = CustomDate.getDateForForm();
         let data = LStorage.getData();
+        let today = CustomDate.getDateForForm();
+
         //let data = [];
 
         let formAddProps = [{
                             type: 'text', 
-                            placeholder: 'Добавить',
-                            required: 'true'
+                            required: 'true',
+                            placeholder: 'Добавить'
                         },
                         {                                                
-                            type: 'date', 
+                            type: 'date',
                             value: today,
                             required: 'true'
                         },
@@ -34,11 +35,11 @@ export class App {
                                     placeholder: 'Поиск по тексту'
                                 },
                                 {                                                
-                                    type: 'date', 
+                                    type: 'date',
                                     value: today
                                 },
                                 {                                                
-                                    type: 'date', 
+                                    type: 'date',
                                     value: today
                                 },
                                 {                                                
