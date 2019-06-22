@@ -8,7 +8,7 @@ export class List {
      * @param {Array} data 
      */
     constructor(htmlEl, data) {
-        this.$el = htmlEl;
+        this.el = htmlEl;
         this.data = data;
         this._setFullData();
         this.isSortedByDate = false;
@@ -33,10 +33,10 @@ export class List {
      */
     _render() {
         //this should be done through DOM methods?
-        this.$el.innerHTML = '';
-        this.$table = document.createElement('table');
+        this.el.innerHTML = '';
+        this.table = document.createElement('table');
         this._addHeader();
-        this.$el.appendChild(this.$table);
+        this.el.appendChild(this.table);
         let i = 0;
         while (this.data[i]) {
             this._renderItem(this.data[i], i);
@@ -48,22 +48,22 @@ export class List {
      * adds header for the table
      */
     _addHeader() {
-        let $header = document.createElement('tr');
-        $header.classList.add('list-header');
-        let $headerCheck = this._getNewTd({}, 'header-check');
-        let $headerDate = this._getNewTd({}, 'header-date');
-        let $headerText = this._getNewTd({}, 'header-text');
-        let $headerDelete = this._getNewTd({}, 'header-delete');
+        let header = document.createElement('tr');
+        header.classList.add('list-header');
+        let headerCheck = this._getNewTd({}, 'header-check');
+        let headerDate = this._getNewTd({}, 'header-date');
+        let headerText = this._getNewTd({}, 'header-text');
+        let headerDelete = this._getNewTd({}, 'header-delete');
 
-        $headerDate.innerHTML = 'Date';
-        $headerText.innerHTML = 'Text';
+        headerDate.innerHTML = 'Date';
+        headerText.innerHTML = 'Text';
 
-        $header.appendChild($headerCheck);
-        $header.appendChild($headerDate);
-        $header.appendChild($headerText);
-        $header.appendChild($headerDelete);
+        header.appendChild(headerCheck);
+        header.appendChild(headerDate);
+        header.appendChild(headerText);
+        header.appendChild(headerDelete);
 
-        this.$table.appendChild($header);
+        this.table.appendChild(header);
     }
 
     /**
@@ -72,46 +72,46 @@ export class List {
      * @param {number} index 
      */
     _renderItem(item) {
-        let $newItem = document.createElement('tr');
-        $newItem.classList.add('list-item');
+        let newItem = document.createElement('tr');
+        newItem.classList.add('list-item');
         if (item.checked) {
-            $newItem.classList.add('list-item-checked')};
+            newItem.classList.add('list-item-checked')};
 
-        let $itemCheck =  this._getNewTd(item, 'check');
-        let $itemDate = this._getNewTd(item, 'date');
-        let $itemText = this._getNewTd(item, 'text');
-        let $itemDelete = this._getNewTd();
+        let itemCheck =  this._getNewTd(item, 'check');
+        let itemDate = this._getNewTd(item, 'date');
+        let itemText = this._getNewTd(item, 'text');
+        let itemDelete = this._getNewTd();
 
-        $newItem.appendChild($itemCheck);
-        $newItem.appendChild($itemDate);
-        $newItem.appendChild($itemText);
-        $newItem.appendChild($itemDelete);
+        newItem.appendChild(itemCheck);
+        newItem.appendChild(itemDate);
+        newItem.appendChild(itemText);
+        newItem.appendChild(itemDelete);
 
-        $newItem.setAttribute('data-index', item.index);
+        newItem.setAttribute('data-index', item.index);
 
-        this.$table.appendChild($newItem);
+        this.table.appendChild(newItem);
     }
     
     /**
      * returns new div with data from item and ClassName
      * @param {Obj} item 
      * @param {String} className 
-     * @returns {htmlEl} $newDiv
+     * @returns {htmlEl} newDiv
      */
     _getNewTd(item = {}, className = 'delete') {
-        let $newTd = document.createElement('td');
-        $newTd.classList.add('list-item-' + className);
+        let newTd = document.createElement('td');
+        newTd.classList.add('list-item-' + className);
         if (className in item) {
-            $newTd.innerHTML = item[className];
+            newTd.innerHTML = item[className];
         };
-        return $newTd;
+        return newTd;
     }
 
     /**
      * adds event listeners  on list
      */
     _initEvents() {
-        this.$el.addEventListener('click', this._onClick.bind(this));
+        this.el.addEventListener('click', this._onClick.bind(this));
     }
 
     /**

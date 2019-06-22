@@ -7,7 +7,7 @@ export class Form {
      * @param {Array} args inputs configuration 
      */
     constructor(htmlEl, ...args) {
-        this.$el = htmlEl;
+        this.el = htmlEl;
         this.inputs = args[0];
         this._render();
         this._initEvents();
@@ -17,11 +17,11 @@ export class Form {
      * renders the form
      */
     _render() {
-        this.$el.innerHTML = '';
+        this.el.innerHTML = '';
 
-        this.$div = document.createElement('div');
-        this.$div.classList.add('inputs-wrap');
-        this.$el.appendChild(this.$div);
+        this.div = document.createElement('div');
+        this.div.classList.add('inputs-wrap');
+        this.el.appendChild(this.div);
 
         if (this.inputs[0]) {
         this.inputs.forEach(element => {
@@ -37,14 +37,14 @@ export class Form {
     _addInput(input) {
         let className = 'form-input-' + input.type;
 
-        let $newInput = document.createElement('input');
-        $newInput.classList.add(className);
+        let newInput = document.createElement('input');
+        newInput.classList.add(className);
         
         for (let key in input) {
-            $newInput.setAttribute(key, input[key]);
+            newInput.setAttribute(key, input[key]);
         }
         
-        this.$div.appendChild($newInput);
+        this.div.appendChild(newInput);
     }
 
     /**
@@ -53,10 +53,10 @@ export class Form {
      * and for submitting form
      */
     _initEvents() {
-        this.$el.addEventListener('submit', e => {
+        this.el.addEventListener('submit', e => {
             e.preventDefault();
             this._submitForm()});
-        this.$el.addEventListener('click', e => {
+        this.el.addEventListener('click', e => {
             if (e.target.classList.contains('form-input-button')) {
                 this._dropFilters();
             }
@@ -70,7 +70,7 @@ export class Form {
         let formData = this._getFormData();
         this._dropInputs();
         let formSubmit = new CustomEvent('formSubmit', {bubbles: true, detail: formData});
-        this.$el.dispatchEvent(formSubmit);
+        this.el.dispatchEvent(formSubmit);
     }
 
     /**
@@ -78,8 +78,8 @@ export class Form {
      * @returns {Object} values of inputs
      */
     _getFormData() {
-        let textValue = this.$el.querySelector('input[type="text"]').value;
-        let dateInputs = this.$el.querySelectorAll('input[type="date"]');
+        let textValue = this.el.querySelector('input[type="text"]').value;
+        let dateInputs = this.el.querySelectorAll('input[type="date"]');
 
         if (!dateInputs[1]) return {text: textValue, 
                                     date: CustomDate.getPrettyDate(new Date(dateInputs[0].value))}
@@ -91,8 +91,7 @@ export class Form {
     }
 
     _dropInputs() {
-        let textInput = this.$el.querySelector('input[type=text]');
-        textInput.value = '';
+        this.el.querySelector('input[type=text]').value = '';
     }
 
     /**
@@ -100,6 +99,6 @@ export class Form {
      */
     _dropFilters() {
         let dropFilters = new CustomEvent('dropFilters', {bubbles: true});
-        this.$el.dispatchEvent(dropFilters);
+        this.el.dispatchEvent(dropFilters);
     }
 }

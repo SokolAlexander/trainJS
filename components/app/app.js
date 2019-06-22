@@ -9,7 +9,7 @@ export class App {
      * @param {htmlEl} htmlEl 
      */
     constructor(htmlEl) {
-        this.$el = htmlEl;
+        this.el = htmlEl;
         let data = LStorage.getData();
         let today = CustomDate.getDateForForm();
 
@@ -65,10 +65,10 @@ export class App {
      * @returns {htmlEl} new element
      */
     _getNewEl(tag, className) {
-        let $newEl = document.createElement(tag);
-        $newEl.classList.add(className, 'js-' + className);
-        this.$el.appendChild($newEl);
-        return $newEl;
+        let newEl = document.createElement(tag);
+        newEl.classList.add(className, 'js-' + className);
+        this.el.appendChild(newEl);
+        return newEl;
     }
 
     /**
@@ -76,15 +76,15 @@ export class App {
      * filtering items, dropping filters, saviing data
      */
     _initEvents() {
-        this.$el.addEventListener('formSubmit', e => {
-            if (e.target === this.formAdd.$el) {
+        this.el.addEventListener('formSubmit', e => {
+            if (e.target === this.formAdd.el) {
                 this.list.addItem(e);
             } else {
                 this.list.filterData(e);
             }
         });
 
-        this.$el.addEventListener('dropFilters', e => {
+        this.el.addEventListener('dropFilters', e => {
             this.list.dropFilters();
         });
     }
