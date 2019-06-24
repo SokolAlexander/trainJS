@@ -53,8 +53,17 @@ export class Form {
      * and for submitting form
      */
     _initEvents() {
+        if (this.el.classList.contains('form-filter')) {
+            
+        let inputText = this.el.querySelector('input[type=text]');
+        inputText.addEventListener('input', e => 
+            {this._submitTextFilter();
+            console.log(e);
+            });
+        }
         this.el.addEventListener('submit', e => {
             e.preventDefault();
+            this._dropInputs();
             this._submitForm()});
         this.el.addEventListener('click', e => {
             if (e.target.classList.contains('form-input-button')) {
@@ -63,12 +72,19 @@ export class Form {
         })
     }
 
+    _submitTextFilter() {
+        let formData = this._getFormData();
+console.log('ok');
+        let textFilterSubmit = new CustomEvent('textFilterSubmit', {bubbles: true, detail: formData});
+        this.el.dispatchEvent(textFilterSubmit);
+    }
+
     /**
      * dispatches custom event to submit form
      */
     _submitForm() {
         let formData = this._getFormData();
-        this._dropInputs();
+
         let formSubmit = new CustomEvent('formSubmit', {bubbles: true, detail: formData});
         this.el.dispatchEvent(formSubmit);
     }

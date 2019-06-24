@@ -168,14 +168,26 @@ export class List {
      */
     filterData(e) {
         let {dateFrom, dateTo} = this._checkDates(e.detail.dateFrom, e.detail.dateTo);
+        
+        this.filterByText(e);
+        this._filterByDate(e.detail.dateFrom, e.detail.dateeTo);
+        
+        this._render();
+    }
+    
+    filterByText(e) {
+        if (!e.detail.data) this.data = this.fullData;
+        this.data = this.data.filter(item => {
+            return (item.text.indexOf(e.detail.text) !== -1)
+        })
+        this._render();
+    }
 
-        let substring = e.detail.text;
+    _filterByDate(dateForm, dateTo) {
         this.data = this.data.filter(item => {
             return (CustomDate.compareDates(dateFrom, item.date) &&
-                    CustomDate.compareDates(item.date, dateTo) &&
-                    item.text.indexOf(substring) !== -1)
+                    CustomDate.compareDates(item.date, dateTo))
         });
-        this._render();
     }
 
     /**

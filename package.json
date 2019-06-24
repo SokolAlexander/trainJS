@@ -5,13 +5,20 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "./node_modules/.bin/static ."
+    "serve": "./node_modules/.bin/static .",
+    "lint": "./node_modules/.bin/eslint",
+    "lintfix": "./node_modules/.bin/eslint --fix"
   },
   "author": "Alexander Sokol",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-google": "^0.13.0"
+    "eslint": "^6.0.0",
+    "eslint-config-google": "^0.13.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0"
   },
   "dependencies": {
     "node-static": "^0.7.11"
