@@ -1,5 +1,4 @@
 import {List} from '../list/list.js';
-//import {Form} from '../form/form.js';
 import {FormAdd} from '../form/formAdd.js';
 import {FormFilter} from '../form/formFilter.js';
 import {LStorage} from '../localStorage/localStorage.js';
@@ -56,7 +55,8 @@ export class App {
       value: 'Сбросить',
     }];
 
-    this.formAdd = new FormAdd(this._getNewEl('form', 'form-add'), formAddProps);
+    this.formAdd = new FormAdd(this._getNewEl('form', 'form-add'),
+        formAddProps);
     this.list = new List(this._getNewEl('div', 'list'), data);
     this.formFilter = new FormFilter(this._getNewEl('form', 'form-filter'),
         formFilterProps);
@@ -82,7 +82,7 @@ export class App {
      * filtering items, dropping filters, saviing data
      */
   _initEvents() {
-    this.el.addEventListener('formSubmit', e => {
+    this.el.addEventListener('formSubmit', (e) => {
       if (e.target === this.formAdd.el) {
         this.list.addItem(e);
       } else {
@@ -90,11 +90,11 @@ export class App {
       }
     });
 
-    this.el.addEventListener('textFilterSubmit', e => {
+    this.el.addEventListener('textFilterSubmit', (e) => {
       this.list.filterByText(e);
     });
 
-    this.el.addEventListener('dropFilters', e => {
+    this.el.addEventListener('dropFilters', (e) => {
       this.list.dropFilters();
     });
   }

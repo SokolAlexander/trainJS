@@ -1,77 +1,85 @@
+/**
+ * class for working with localStorage
+ */
 export class LStorage {
-    /**
+  /**
      * saves the data to localStorage
-     * @param {Object} data 
+     * @param {Object} item
      */
-    static setData(item) {
-        LStorage.checkStorage();
-        //LStorage.clear();
-        let name = item.index + '-js-app';
-        let value = '';
-        for (let key in item) {
-            value += `${key}:${item[key]};`
-        }
-        window.localStorage.setItem(name, value);
+  static setData(item) {
+    LStorage.checkStorage();
+    // LStorage.clear();
+    const name = item.index + '-js-app';
+    let value = '';
+    for (const key in item) {
+      value += `${key}:${item[key]};`;
     }
+    window.localStorage.setItem(name, value);
+  }
 
-    static removeData(index) {
-        let name = index + '-js-app';
-        window.localStorage.removeItem(name);
+  /**
+   * removes an item from localStorage
+   * @param {number} index 
+   */
+  static removeData(index) {
+    const name = index + '-js-app';
+    window.localStorage.removeItem(name);
+  }
 
-    }
-
-    /**
+  /**
      * gets data to display from localStorage
-     * @returns {Array}
+     * @return {Array}
      */
-    static getData() {
-        LStorage.checkStorage();
+  static getData() {
+    LStorage.checkStorage();
 
-        let data = [];
-        let i = 0;
-        for (let key in window.localStorage) {
-            if (key.indexOf('-js-app') === -1) continue;
+    const data = [];
+    let i = 0;
+    for (const key in window.localStorage) {
+      if (key.indexOf('-js-app') === -1) continue;
 
-            data[i] = {};
-            let start = 0;
-            let dd = window.localStorage[key].indexOf(':', start);
-            let pause = window.localStorage[key].indexOf(';', start);
+      data[i] = {};
+      let start = 0;
+      let dd = window.localStorage[key].indexOf(':', start);
+      let pause = window.localStorage[key].indexOf(';', start);
 
-            while (dd !== -1) {
-                data[i][window.localStorage[key].slice(start, dd)] = 
+      while (dd !== -1) {
+        data[i][window.localStorage[key].slice(start, dd)] =
                         window.localStorage[key].slice(dd+1, pause);
 
-                start = pause + 1;
-                dd = window.localStorage[key].indexOf(':', start);
-                pause = window.localStorage[key].indexOf(';', start);
-            }
-            i++;
-        }
-        return data;
+        start = pause + 1;
+        dd = window.localStorage[key].indexOf(':', start);
+        pause = window.localStorage[key].indexOf(';', start);
+      }
+      i++;
     }
+    return data;
+  }
 
-    static checkStorage() {
-        try {
-            let x = '__storage_test__';
-            window.localStorage.setItem(x, x);
-            window.localStorage.removeItem(x);
-            return;
-        }
-        catch(err) {
-            console.error('LocalStorage unavailable: ' + err);
-        }
+  /**
+   * checks if localStorage is available
+   */
+  static checkStorage() {
+    try {
+      const x = '__storage_test__';
+      window.localStorage.setItem(x, x);
+      window.localStorage.removeItem(x);
+      return;
+    } catch (err) {
+      console.error('LocalStorage unavailable: ' + err);
     }
+  }
 
-    /**
+  /**
      * deletes all the enties in localStorage object
      * that were added by this app
      */
-    static clear() {
-        for (let key in window.localStorage) {
-            if (key.indexOf('-js-app') !== -1) {
-            window.localStorage.removeItem(key);
-            }
-        }
-        console.log('Storage cleared')
+  static clear() {
+    for (const key in window.localStorage) {
+      if (key.indexOf('-js-app') !== -1) {
+        window.localStorage.removeItem(key);
+      }
     }
+    console.log('Storage cleared');
+  }
 }
