@@ -217,8 +217,9 @@ export class List {
     addItem(e) {
         let newItem = e.detail;
         newItem.index = this._getItemIndex();
-        this.data.push(e.detail);
-        this._setFullData();
+        this.data.push(newItem);
+        this.fullData.push(newItem);
+        console.log(this.data);
         this.isSortedByDate = false;
         this.isSortedByText = false;
         

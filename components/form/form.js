@@ -55,8 +55,8 @@ export class Form {
     _initEvents() {
         this.el.addEventListener('submit', e => {
             e.preventDefault();
-            this._submitForm()});
-            this._dropInputs();
+            this._submitForm();
+            this._dropInputs()});
         this.el.addEventListener('click', e => {
             if (e.target.classList.contains('form-input-button')) {
                 this._dropFilters();
