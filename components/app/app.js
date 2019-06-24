@@ -1,5 +1,7 @@
 import {List} from '../list/list.js';
-import {Form} from '../form/form.js';
+//import {Form} from '../form/form.js';
+import {FormAdd} from '../form/formAdd.js';
+import {FormFilter} from '../form/formFilter.js';
 import {LStorage} from '../localStorage/localStorage.js';
 import {CustomDate} from '../customDate/customDate.js';
 
@@ -54,9 +56,9 @@ export class App {
       value: 'Сбросить',
     }];
 
-    this.formAdd = new Form(this._getNewEl('form', 'form-add'), formAddProps);
+    this.formAdd = new FormAdd(this._getNewEl('form', 'form-add'), formAddProps);
     this.list = new List(this._getNewEl('div', 'list'), data);
-    this.formFilter = new Form(this._getNewEl('form', 'form-filter'),
+    this.formFilter = new FormFilter(this._getNewEl('form', 'form-filter'),
         formFilterProps);
 
     this._initEvents();

@@ -53,30 +53,15 @@ export class Form {
      * and for submitting form
      */
     _initEvents() {
-        if (this.el.classList.contains('form-filter')) {
-            
-        let inputText = this.el.querySelector('input[type=text]');
-        inputText.addEventListener('input', e => 
-            {this._submitTextFilter();
-            console.log(e);
-            });
-        }
         this.el.addEventListener('submit', e => {
             e.preventDefault();
-            this._dropInputs();
             this._submitForm()});
+            this._dropInputs();
         this.el.addEventListener('click', e => {
             if (e.target.classList.contains('form-input-button')) {
                 this._dropFilters();
             }
         })
-    }
-
-    _submitTextFilter() {
-        let formData = this._getFormData();
-console.log('ok');
-        let textFilterSubmit = new CustomEvent('textFilterSubmit', {bubbles: true, detail: formData});
-        this.el.dispatchEvent(textFilterSubmit);
     }
 
     /**
@@ -97,24 +82,11 @@ console.log('ok');
         let textValue = this.el.querySelector('input[type="text"]').value;
         let dateInputs = this.el.querySelectorAll('input[type="date"]');
 
-        if (!dateInputs[1]) return {text: textValue, 
-                                    date: CustomDate.getPrettyDate(new Date(dateInputs[0].value))}
-        return {
-            text: textValue,
-            dateFrom: CustomDate.getPrettyDate(new Date(dateInputs[0].value)),
-            dateTo: CustomDate.getPrettyDate(new Date(dateInputs[1].value))
-        }
+        return {text: textValue, 
+            date: CustomDate.getPrettyDate(new Date(dateInputs[0].value))}
     }
 
     _dropInputs() {
         this.el.querySelector('input[type=text]').value = '';
-    }
-
-    /**
-     * dispatches  custom Event to drop filters
-     */
-    _dropFilters() {
-        let dropFilters = new CustomEvent('dropFilters', {bubbles: true});
-        this.el.dispatchEvent(dropFilters);
     }
 }

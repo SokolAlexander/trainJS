@@ -168,10 +168,7 @@ export class List {
      */
     filterData(e) {
         let {dateFrom, dateTo} = this._checkDates(e.detail.dateFrom, e.detail.dateTo);
-        
-        this.filterByText(e);
         this._filterByDate(e.detail.dateFrom, e.detail.dateeTo);
-        
         this._render();
     }
     
